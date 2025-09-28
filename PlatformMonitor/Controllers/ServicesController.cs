@@ -7,16 +7,26 @@ namespace PlatformMonitor.Controllers
 {
     public class ServicesController : Controller
     {
+        private readonly PlatformMonitorConfig _config;
+
+        public ServicesController(Microsoft.Extensions.Options.IOptions<PlatformMonitorConfig> config)
+        {
+            _config = config.Value;
+        }
+
         public async Task<IActionResult> Status()
         {
-            // Example services - replace with real data source or API calls
-            var services = new List<ServiceStatus>
+            // Map config services to ServiceStatus (version and status would be fetched in real scenario)
+            var services = new List<ServiceStatus>();
+            foreach (var svc in _config.Services)
             {
-                new ServiceStatus { Name = "AuthService", Version = "1.2.3", IsUp = true },
-                new ServiceStatus { Name = "DataService", Version = "2.0.1", IsUp = false },
-                new ServiceStatus { Name = "NotificationService", Version = "3.4.5", IsUp = true }
-            };
-            // Simulate async operation
+                services.Add(new ServiceStatus
+                {
+                    Name = svc.Name,
+                    Version = "N/A", // Placeholder, replace with actual version fetch
+                    IsUp = false // Placeholder, replace with actual health check
+                });
+            }
             await Task.Delay(100);
             return View(services);
         }

@@ -9,3 +9,6 @@ All instructions to GitHub Copilot to create the solution
 * add settings file for vccode to not show generated files
 * create a page to show the status of multiple services. Each service should show the version and with a green box if the service is up and red box if the service is down
 * add service page to the main menu
+* move appsettings json files to a Config folder
+* update project configuration to load the config files from the new location
+* add custom config model for PlatformMonitor to have a list of services that contains the name of the service and the url to the service

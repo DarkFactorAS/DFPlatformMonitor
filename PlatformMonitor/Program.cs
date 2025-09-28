@@ -6,6 +6,10 @@ builder.Configuration
     .AddJsonFile("Config/appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"Config/appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
 
+// Bind PlatformMonitorConfig from configuration
+builder.Services.Configure<PlatformMonitor.Models.PlatformMonitorConfig>(
+    builder.Configuration.GetSection("PlatformMonitor"));
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
