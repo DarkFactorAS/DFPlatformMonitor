@@ -1,0 +1,11 @@
+All instructions to GitHub Copilot to create the solution
+
+
+* Continue with #new workspace setup
+* yes, do the rest of the instructions
+* create launch.json files for visual studio code
+* rename name of launch configuration to "Platform Monitor Web"
+* add build step in tasks for "Platform Monitor Web"
+* add settings file for vccode to not show generated files
+* create a page to show the status of multiple services. Each service should show the version and with a green box if the service is up and red box if the service is down
+* add service page to the main menu
