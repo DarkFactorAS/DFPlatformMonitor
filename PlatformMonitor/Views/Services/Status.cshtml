@@ -1,31 +1,36 @@
 @model IEnumerable<PlatformMonitor.Models.ServiceStatus>
 @{
     ViewData["Title"] = "Service Status";
+    var grouped = Model.GroupBy(s => s.Environment ?? "Unknown");
 }
 <h2>Service Status</h2>
-<table style="width:100%; border-collapse:collapse;">
-    <thead>
-        <tr>
-            <th>Service</th>
-            <th>Version</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var service in Model)
-        {
-            var color = service.IsUp ? "#d4edda" : "#f8d7da";
-            var border = service.IsUp ? "2px solid #28a745" : "2px solid #dc3545";
-            var statusText = service.IsUp ? "Up" : "Down";
-        <tr>
-            <td>@service.Name</td>
-            <td>@service.Version</td>
-            <td>
-                <div style="background:@color; border:@border; color:#333; padding:8px 16px; border-radius:6px; display:inline-block; min-width:60px; text-align:center;">
-                    @statusText
-                </div>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+@foreach (var envGroup in grouped)
+{
+    <h3>@envGroup.Key</h3>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:32px;">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Version</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var service in envGroup)
+            {
+                var color = service.IsUp ? "#d4edda" : "#f8d7da";
+                var border = service.IsUp ? "2px solid #28a745" : "2px solid #dc3545";
+                var statusText = service.IsUp ? "Up" : "Down";
+            <tr>
+                <td>@service.Name</td>
+                <td>@service.Version</td>
+                <td>
+                    <div style="background:@color; border:@border; color:#333; padding:8px 16px; border-radius:6px; display:inline-block; min-width:60px; text-align:center;">
+                        @statusText
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -45,7 +45,8 @@ namespace PlatformMonitor.Controllers
                 {
                     Name = svc.Name,
                     Version = version,
-                    IsUp = isUp
+                    IsUp = isUp,
+                    Environment = svc.Environment
                 });
             }
             return View(services);

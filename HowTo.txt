@@ -13,5 +13,4 @@ All instructions to GitHub Copilot to create the solution
 * update project configuration to load the config files from the new location
 * add custom config model for PlatformMonitor to have a list of services that contains the name of the service and the url to the service
   ** Yes to bind the new config, fix builds etc
-
-  
+* add environment to the service in the config file and group by the environment on the status page
