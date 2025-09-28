@@ -12,3 +12,6 @@ All instructions to GitHub Copilot to create the solution
 * move appsettings json files to a Config folder
 * update project configuration to load the config files from the new location
 * add custom config model for PlatformMonitor to have a list of services that contains the name of the service and the url to the service
+  ** Yes to bind the new config, fix builds etc
+
+  

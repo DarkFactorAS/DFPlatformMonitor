@@ -16,18 +16,38 @@ namespace PlatformMonitor.Controllers
 
         public async Task<IActionResult> Status()
         {
-            // Map config services to ServiceStatus (version and status would be fetched in real scenario)
             var services = new List<ServiceStatus>();
+            var httpClient = new System.Net.Http.HttpClient();
             foreach (var svc in _config.Services)
             {
+                string version = "N/A";
+                bool isUp = false;
+                try
+                {
+                    // Health check: try to GET /Ping endpoint
+                    var healthResponse = await httpClient.GetAsync($"{svc.Url}/Ping");
+                    isUp = healthResponse.IsSuccessStatusCode;
+
+                    // Version fetch: try to GET /version endpoint
+                    var versionResponse = await httpClient.GetAsync($"{svc.Url}/version");
+                    if (versionResponse.IsSuccessStatusCode)
+                    {
+                        version = await versionResponse.Content.ReadAsStringAsync();
+                        version = version.Trim('"'); // Remove quotes if JSON string
+                    }
+                }
+                catch
+                {
+                    isUp = false;
+                    version = "N/A";
+                }
                 services.Add(new ServiceStatus
                 {
                     Name = svc.Name,
-                    Version = "N/A", // Placeholder, replace with actual version fetch
-                    IsUp = false // Placeholder, replace with actual health check
+                    Version = version,
+                    IsUp = isUp
                 });
             }
-            await Task.Delay(100);
             return View(services);
         }
     }
