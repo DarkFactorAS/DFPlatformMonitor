@@ -15,3 +15,4 @@ All instructions to GitHub Copilot to create the solution
   ** Yes to bind the new config, fix builds etc
 * add environment to the service in the config file and group by the environment on the status page
 * can you make the status page the default page when showing the webpage
+* can you make a light grey background for the service status title
