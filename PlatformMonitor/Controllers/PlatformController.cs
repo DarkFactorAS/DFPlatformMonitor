@@ -9,16 +9,18 @@ namespace PlatformMonitor.Controllers
     public class PlatformController : Controller
     {
         private readonly IPlatformProvider _platformProvider;
+        private readonly System.Net.Http.IHttpClientFactory _httpClientFactory;
 
-        public PlatformController(IPlatformProvider platformProvider)
+        public PlatformController(IPlatformProvider platformProvider, System.Net.Http.IHttpClientFactory httpClientFactory)
         {
             _platformProvider = platformProvider;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<IActionResult> Index()
         {
             var platforms = _platformProvider.GetAllPlatforms();
-            var httpClient = new System.Net.Http.HttpClient();
+            var httpClient = _httpClientFactory.CreateClient();
             foreach (var platform in platforms)
             {
                 try
