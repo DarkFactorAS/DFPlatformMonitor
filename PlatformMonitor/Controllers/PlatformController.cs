@@ -15,32 +15,30 @@ namespace PlatformMonitor.Controllers
             _platformProvider = platformProvider;
         }
 
-        public async Task<IActionResult> Status()
+        public async Task<IActionResult> Index()
         {
             var platforms = _platformProvider.GetAllPlatforms();
             var httpClient = new System.Net.Http.HttpClient();
             foreach (var platform in platforms)
             {
-                string version = "N/A";
-                bool isUp = false;
                 try
                 {
                     // Health check: try to GET /Ping endpoint
                     var healthResponse = await httpClient.GetAsync($"{platform.Url}/Ping");
-                    isUp = healthResponse.IsSuccessStatusCode;
+                    platform.IsUp = healthResponse.IsSuccessStatusCode;
 
                     // Version fetch: try to GET /version endpoint
                     var versionResponse = await httpClient.GetAsync($"{platform.Url}/version");
                     if (versionResponse.IsSuccessStatusCode)
                     {
-                        version = await versionResponse.Content.ReadAsStringAsync();
-                        version = version.Trim('"'); // Remove quotes if JSON string
+                        platform.Version = await versionResponse.Content.ReadAsStringAsync();
+                        platform.Version = platform.Version.Trim('"'); // Remove quotes if JSON string
                     }
                 }
                 catch
                 {
-                    isUp = false;
-                    version = "N/A";
+                    platform.IsUp = false;
+                    platform.Version = "N/A";
                 }
             }
             return View(platforms);
