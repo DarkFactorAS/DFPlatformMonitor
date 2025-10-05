@@ -85,8 +85,7 @@ jobs:
       run: docker build ${{ inputs.docker_path }} --file Dockerfile --tag ${{ steps.convert_to_lowercase.outputs.DOCKER_NAME }}-${{ inputs.environment }}-image:${{ env.TIMESTAMP }}  --build-arg username=${{ secrets.NUGET_USERNAME }} --build-arg token=${{ secrets.NUGET_TOKEN }}
 
     - name: Stop old Docker container
-      run:
-        docker stop ${{ steps.convert_to_lowercase.outputs.DOCKER_NAME }}-${{ inputs.environment }} || true
+      run: docker stop ${{ steps.convert_to_lowercase.outputs.DOCKER_NAME }}-${{ inputs.environment }} || true
 
     - name: Delete old Docker container
       run:
