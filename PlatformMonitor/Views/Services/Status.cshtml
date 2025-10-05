@@ -1,4 +1,4 @@
-@model IEnumerable<PlatformMonitor.Models.ServiceStatus>
+@model IEnumerable<PlatformMonitor.Models.Platform>
 @{
     ViewData["Title"] = "Service Status";
     var grouped = Model.GroupBy(s => s.Environment ?? "Unknown");
