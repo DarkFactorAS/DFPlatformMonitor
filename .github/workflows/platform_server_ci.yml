@@ -3,9 +3,9 @@
 # Change the variables in this section to match your project
 #
 
-name: Platform Server - CI Build
+name: Platform Monitor - CI Build
 env:
-  PROJECT_NAME: PlatformServer
+  PROJECT_NAME: PlatformMonitor
   CONFIGURATION: Release
 
 defaults:
