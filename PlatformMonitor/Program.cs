@@ -64,6 +64,7 @@ namespace PlatformMonitor
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddTransient<IConfigurationHelper, ConfigurationHelper<AppSettings>>();
+                services.AddHttpClient(); 
 
                 new DFServices(services)
                     .SetupLogger()

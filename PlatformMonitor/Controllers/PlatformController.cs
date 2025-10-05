@@ -3,15 +3,16 @@ using PlatformMonitor.Models;
 using PlatformMonitor.Provider;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace PlatformMonitor.Controllers
 {
     public class PlatformController : Controller
     {
         private readonly IPlatformProvider _platformProvider;
-        private readonly System.Net.Http.IHttpClientFactory _httpClientFactory;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public PlatformController(IPlatformProvider platformProvider, System.Net.Http.IHttpClientFactory httpClientFactory)
+        public PlatformController(IPlatformProvider platformProvider, IHttpClientFactory httpClientFactory)
         {
             _platformProvider = platformProvider;
             _httpClientFactory = httpClientFactory;
