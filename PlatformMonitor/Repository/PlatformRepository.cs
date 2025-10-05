@@ -36,7 +36,9 @@ namespace PlatformMonitor.Repository
                         platform.Id = Convert.ToInt32(reader["id"]);
                         platform.Name = reader["name"].ToString();
                         platform.Url = reader["url"].ToString();
-                        platform.Environment = reader["environment"].ToString();
+                        platform.Environment = reader.IsDBNull(reader.GetOrdinal("environment"))
+                            ? null
+                            : reader.GetString(reader.GetOrdinal("environment"));
                         platforms.Add(platform);
                     }
                 }
