@@ -1,0 +1,62 @@
+services:
+
+  platform_monitor_db:
+    image: mariadb:10.9
+    networks: 
+      - net_platform_monitor_backend
+    container_name: platform_monitor_database
+    user: root
+    restart: always
+    environment:
+      - "MYSQL_ROOT_PASSWORD=secret"
+      - "MYSQL_DATABASE=account"
+      - "MYSQL_USER=accuser"
+      - "MYSQL_PASSWORD=unity"
+    volumes:
+      - platform_monitor_mariadb:/var/lib/mysql
+    ports:
+      - 5402:3306
+  
+  platform_monitor_admin:
+    image: adminer
+    restart: always
+    networks: 
+      - net_platform_monitor_backend
+    environment: 
+      ADMINER_DEFAULT_SERVER: platform_monitor_db
+    ports:
+      - 5401:8080
+
+  platform_monitor_server:
+    networks: 
+      - net_platform_monitor_backend
+      - net_platform_monitor_frontend
+    build:
+      network: host
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        username: ${NUGET_USERNAME}
+        token: ${NUGET_TOKEN}
+    restart: always
+    ports:
+      - "5400:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=DevelopmentDocker
+    depends_on: 
+      - platform_monitor_db
+
+networks:
+  net_platform_monitor_backend:
+    name: platform_monitor_backend
+  net_platform_monitor_frontend:
+    name: platform_monitor_frontend
+
+volumes:
+  # Remove volume
+  # docker volume rm platform_monitor_mariadb
+  #
+  # Create volume 
+  # docker volume create platform_monitor_mariadb
+  platform_monitor_mariadb:
+    external: true

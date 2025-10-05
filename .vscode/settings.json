@@ -3,5 +3,37 @@
         "**/bin": true,
         "**/obj": true,
         "**/.vs": true
-    }
+    },
+    // Disable error popups and notifications
+    "problems.decorations.enabled": false,
+    "problems.showCurrentInStatus": false,
+    "csharp.showOmnisharpLogOnError": false,
+    "omnisharp.showOmnisharpLogOnError": false,
+    "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": false,
+    "editor.lightbulb.enabled": "off",
+    "editor.codeLens": false,
+    "editor.hover.enabled": false,
+    "editor.parameterHints.enabled": false,
+    "editor.quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.wordBasedSuggestions": "off",
+    "extensions.ignoreRecommendations": true,
+    "update.showReleaseNotes": false,
+    "telemetry.telemetryLevel": "off",
+    "workbench.tips.enabled": false,
+    "workbench.welcomePage.walkthroughs.openOnInstall": false,
+    "window.commandCenter": false,
+    "notifications.enabled": false,
+    // Additional C# and .NET error suppression
+    "dotnet.server.suppressLspErrorToasts": true,
+    "csharp.suppressHiddenDiagnostics": true,
+    "csharp.suppressBuildAssetsNotification": true,
+    "omnisharp.suppressBuildAssetsNotification": true,
+    "omnisharp.enableEditorConfigSupport": false,
+    "omnisharp.enableImportCompletion": false,
+    "omnisharp.enableRoslynAnalyzers": false
 }

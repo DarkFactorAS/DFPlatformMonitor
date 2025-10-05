@@ -1,0 +1,51 @@
+#
+# Build CI file
+# Change the variables in this section to match your project
+#
+
+name: Platform Monitor - CI Build
+env:
+  PROJECT_NAME: PlatformMonitor
+  CONFIGURATION: Release
+
+defaults:
+  run:
+    working-directory: ./PlatformMonitor
+
+#
+# Everything below this is template code
+#
+
+on:
+  push:
+    branches-ignore: ["master"]
+#    paths-ignore: [".github/workflows/**"]
+  workflow_dispatch:
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  build:
+
+    # Timeout for the job
+    timeout-minutes: 15
+
+    runs-on: ubuntu-latest
+
+    # Static variables used in the workflow
+    env:
+      NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }}
+      NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+
+    # Build steps
+    steps:
+
+    # Check out code from the repository
+    - name: Checkout repository
+      uses: actions/checkout@v4    
+
+    - name: ${{ env.PROJECT_NAME }} - Restore dependencies
+      run: dotnet restore ${{ env.PROJECT_NAME }}.csproj
+
+    - name: ${{ env.PROJECT_NAME }} - Build
+      run: dotnet build ${{ env.PROJECT_NAME }}.csproj --no-restore --configuration ${{ env.CONFIGURATION }}

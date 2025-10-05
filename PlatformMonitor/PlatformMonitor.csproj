@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DarkFactor.Common.Lib" Version="1.6.6" />
+  </ItemGroup>
+
 </Project>
