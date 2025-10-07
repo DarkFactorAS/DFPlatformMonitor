@@ -40,6 +40,7 @@ jobs:
     with:
       environment: staging
       source_folder: PlatformMonitor
+      docker_file: ./PlatformMonitor/Dockerfile_GitHubActions
     secrets: inherit
 
   production:
@@ -49,5 +50,6 @@ jobs:
     with:
       environment: production
       source_folder: PlatformMonitor
+      docker_file: ./PlatformMonitor/Dockerfile_GitHubActions
     secrets: inherit
     needs: staging

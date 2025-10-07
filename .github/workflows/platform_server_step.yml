@@ -87,7 +87,7 @@ jobs:
 
     # Build the image
     - name: Build Docker image
-      run: docker build ${{ inputs.source_folder }} --file ${{ inputs.docker_file }} --tag ${{ steps.convert_to_lowercase.outputs.DOCKER_NAME }}-${{ inputs.environment }}-image:${{ env.TIMESTAMP }}  --build-arg username=${{ secrets.NUGET_USERNAME }} --build-arg token=${{ secrets.NUGET_TOKEN }}
+      run: docker build . --file ${{ inputs.docker_file }} --tag ${{ steps.convert_to_lowercase.outputs.DOCKER_NAME }}-${{ inputs.environment }}-image:${{ env.TIMESTAMP }}  --build-arg username=${{ secrets.NUGET_USERNAME }} --build-arg token=${{ secrets.NUGET_TOKEN }}
 
     - name: Stop old Docker container
       run: docker stop ${{ steps.convert_to_lowercase.outputs.DOCKER_NAME }}-${{ inputs.environment }} || true
