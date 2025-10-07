@@ -39,7 +39,7 @@ jobs:
     uses: ./.github/workflows/platform_server_step.yml
     with:
       environment: staging
-      source_folder: .
+      source_folder: PlatformMonitor
     secrets: inherit
 
   production:
@@ -48,6 +48,6 @@ jobs:
     uses: ./.github/workflows/platform_server_step.yml
     with:
       environment: production
-      source_folder: .
+      source_folder: PlatformMonitor
     secrets: inherit
     needs: staging
