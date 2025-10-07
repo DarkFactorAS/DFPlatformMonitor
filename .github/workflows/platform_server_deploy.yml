@@ -39,7 +39,8 @@ jobs:
     uses: ./.github/workflows/platform_server_step.yml
     with:
       environment: staging
-      docker_path: .
+      source_folder: PlatformMonitor
+      docker_file: ./PlatformMonitor/Dockerfile_GitHubActions
     secrets: inherit
 
   production:
@@ -48,6 +49,7 @@ jobs:
     uses: ./.github/workflows/platform_server_step.yml
     with:
       environment: production
-      docker_path: .
+      source_folder: PlatformMonitor
+      docker_file: ./PlatformMonitor/Dockerfile_GitHubActions
     secrets: inherit
     needs: staging
