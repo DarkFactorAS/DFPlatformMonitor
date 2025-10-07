@@ -7,7 +7,7 @@ name: Platform Monitor - Deploy
 
 defaults:
   run:
-    working-directory: .
+    working-directory: ./PlatformMonitor
     
 #
 # Everything below this is template code
@@ -39,7 +39,7 @@ jobs:
     uses: ./.github/workflows/platform_server_step.yml
     with:
       environment: staging
-      source_folder: PlatformMonitor
+      source_folder: .
     secrets: inherit
 
   production:
@@ -48,6 +48,6 @@ jobs:
     uses: ./.github/workflows/platform_server_step.yml
     with:
       environment: production
-      source_folder: PlatformMonitor
+      source_folder: .
     secrets: inherit
     needs: staging
