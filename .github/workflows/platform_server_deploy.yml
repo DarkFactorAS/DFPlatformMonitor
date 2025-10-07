@@ -19,7 +19,7 @@ on:
 
   pull_request:
     types: [closed]
-    branches: ["master"]
+    branches: ["master", "main", "feature/*"]
 
   workflow_dispatch:
     inputs:
