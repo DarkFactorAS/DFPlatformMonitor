@@ -24,7 +24,7 @@ namespace PlatformMonitor
     class Program
     {
         public static string AppName = "PlatformMonitor";
-        public static string AppVersion = "0.2.0";
+        public static string AppVersion = "0.2.1";
 
         static void Main(string[] args)
         {
