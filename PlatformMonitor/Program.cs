@@ -24,7 +24,7 @@ namespace PlatformMonitor
     class Program
     {
         public static string AppName = "PlatformMonitor";
-        public static string AppVersion = "0.1.0";
+        public static string AppVersion = "0.2.0";
 
         static void Main(string[] args)
         {
@@ -63,7 +63,7 @@ namespace PlatformMonitor
             Host.CreateDefaultBuilder(args)
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddTransient<IConfigurationHelper, ConfigurationHelper<AppSettings>>();
+                services.AddSingleton<IConfigurationHelper, ConfigurationHelper<AppSettings>>();
                 services.AddHttpClient(); 
 
                 new DFServices(services)
