@@ -4,6 +4,7 @@ using PlatformMonitor.Provider;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
+using DFCommonLib.Logger;
 
 namespace PlatformMonitor.Controllers
 {
@@ -11,11 +12,13 @@ namespace PlatformMonitor.Controllers
     {
         private readonly IPlatformProvider _platformProvider;
         private readonly IHttpClientFactory _httpClientFactory;
+        private IDFLogger<PlatformController> _logger;
 
-        public PlatformController(IPlatformProvider platformProvider, IHttpClientFactory httpClientFactory)
+        public PlatformController(IPlatformProvider platformProvider, IHttpClientFactory httpClientFactory, IDFLogger<PlatformController> logger)
         {
             _platformProvider = platformProvider;
             _httpClientFactory = httpClientFactory;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -24,6 +27,8 @@ namespace PlatformMonitor.Controllers
             var httpClient = _httpClientFactory.CreateClient();
             foreach (var platform in platforms)
             {
+                platform.IsUp = false;
+
                 try
                 {
                     // Health check: try to GET /Ping endpoint
@@ -38,9 +43,9 @@ namespace PlatformMonitor.Controllers
                         platform.Version = platform.Version.Trim('"'); // Remove quotes if JSON string
                     }
                 }
-                catch
+                catch (System.Exception ex)
                 {
-                    platform.IsUp = false;
+                    _logger.LogError($"Error connecting to platform {platform.Name} at {platform.Url} : {ex.Message}");
                     platform.Version = "N/A";
                 }
             }
