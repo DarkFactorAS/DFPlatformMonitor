@@ -8,8 +8,11 @@ ARG token
 ENV NUGET_USERNAME=$username
 ENV NUGET_TOKEN=$token
 
+# Add sourcepath as argument
+ARG source_path=./PlatformMonitor/
+
 # Copy files
-COPY . .
+COPY $source_path ./
 
 # Restore and build web
 RUN dotnet restore PlatformMonitor.csproj

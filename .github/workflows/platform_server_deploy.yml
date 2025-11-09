@@ -7,11 +7,7 @@ name: Platform Monitor - Deploy
 
 defaults:
   run:
-    working-directory: ./PlatformMonitor
-    
-#
-# Everything below this is template code
-#
+    working-directory: .
 
 on:
   release:
@@ -36,20 +32,20 @@ jobs:
   staging:
     if: github.event.pull_request.merged == true || github.event.inputs.environment == 'staging' || github.event.inputs.environment == 'production'
     name: Deploy to Staging
-    uses: ./.github/workflows/platform_server_step.yml
+    uses: DarkFactorAS/Infrastructure/.github/workflows/infrastructure-deploy-server.yml@server_build
     with:
       environment: staging
-      source_folder: PlatformMonitor
-      docker_file: ./PlatformMonitor/Dockerfile_GitHubActions
+      project_path: ./PlatformMonitor
+      project_name: PlatformMonitor
     secrets: inherit
 
   production:
     if: github.event.pull_request.merged == true || github.event.inputs.environment == 'production' || github.event_name == 'release'
     name: Deploy to Production
-    uses: ./.github/workflows/platform_server_step.yml
+    uses: DarkFactorAS/Infrastructure/.github/workflows/infrastructure-deploy-server.yml@server_build
     with:
       environment: production
-      source_folder: PlatformMonitor
-      docker_file: ./PlatformMonitor/Dockerfile_GitHubActions
+      project_path: ./PlatformMonitor
+      project_name: PlatformMonitor
     secrets: inherit
     needs: staging

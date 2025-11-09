@@ -38,6 +38,8 @@ services:
       args:
         username: ${NUGET_USERNAME}
         token: ${NUGET_TOKEN}
+        source_path: .
+
     restart: always
     ports:
       - "5400:8080"
