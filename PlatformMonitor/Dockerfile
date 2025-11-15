@@ -15,7 +15,7 @@ RUN --mount=type=secret,id=nuget_username \
     export NUGET_TOKEN=$(cat /run/secrets/nuget_token) && \
     dotnet restore PlatformMonitor.csproj
 
-    # Publish the application
+# Publish the application
 RUN dotnet publish PlatformMonitor.csproj -c Release -o out 
     
 # Build runtime image
