@@ -16,7 +16,7 @@ RUN --mount=type=secret,id=nuget_username \
     dotnet restore PlatformMonitor.csproj
 
 # Publish the application
-RUN dotnet publish PlatformMonitor.csproj -c Release -o out 
+RUN dotnet publish PlatformMonitor.csproj -c Release -o out
     
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
