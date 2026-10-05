@@ -12,6 +12,7 @@
             <tr>
                 <th style="padding:8px 16px; border-bottom:1px solid #eee;">Service</th>
                 <th style="padding:8px 16px; border-bottom:1px solid #eee;">Version</th>
+                <th style="padding:8px 16px; border-bottom:1px solid #eee;">Link</th>
                 <th style="padding:8px 16px; border-bottom:1px solid #eee;">Status</th>
             </tr>
         </thead>
@@ -24,6 +25,12 @@
             <tr>
                 <td style="padding:8px 16px; border-bottom:1px solid #eee;">@service.Name</td>
                 <td style="padding:8px 16px; border-bottom:1px solid #eee;">@service.Version</td>
+                <td style="padding:8px 16px; border-bottom:1px solid #eee;">
+                    @if (!string.IsNullOrWhiteSpace(service.ServiceUrl))
+                    {
+                        <a href="@service.ServiceUrl" target="_blank" rel="noopener noreferrer">Service</a>
+                    }
+                </td>
                 <td>
                     <div style="background:@color; border:@border; color:#333; padding:8px 16px; border-radius:6px; display:inline-block; min-width:60px; text-align:center;">
                         @statusText

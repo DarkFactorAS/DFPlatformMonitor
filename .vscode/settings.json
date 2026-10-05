@@ -12,7 +12,7 @@
     "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": false,
     "editor.lightbulb.enabled": "off",
     "editor.codeLens": false,
-    "editor.hover.enabled": false,
+    "editor.hover.enabled": "off",
     "editor.parameterHints.enabled": false,
     "editor.quickSuggestions": {
         "other": false,
