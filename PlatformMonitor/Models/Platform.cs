@@ -8,6 +8,7 @@ namespace PlatformMonitor.Models
         public bool IsUp { get; set; }
         public string? Environment { get; set; }
         public string? Url { get; set; }
+        public string? ServiceUrl { get; set; }
 
         public Platform()
         {

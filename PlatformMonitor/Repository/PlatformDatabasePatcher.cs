@@ -26,6 +26,8 @@ namespace PlatformMonitor.Repository
             + ")"
             );
 
+            _dbPatcher.Patch(PATCHER,3, "ALTER TABLE `platforms` ADD COLUMN `service_url` varchar(255) NOT NULL DEFAULT ''");
+
             return _dbPatcher.Successful();
         }
     }
